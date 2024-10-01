@@ -11,4 +11,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get 'categories', to: 'categories#index'
+  get 'categories/new', to: 'categories#new'
+  get 'categories/:id', to: 'categories#show', as: :category
+  post 'categories', to: 'categories#create'
+  delete 'categories/:id', to: 'categories#destroy'
+
+  get 'categories/:category_id/bookmarks/new', to: 'bookmarks#new'
+  resources :categories, except: %i[edit update] do
+    resources :bookmarks, only: %i[new create show]
+  end
+  resources :bookmarks, only: [:destroy]
 end
