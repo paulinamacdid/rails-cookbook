@@ -18,6 +18,7 @@ class CategoriesController < ApplicationController
       redirect_to category_path(@category)
     else
         render :new, status: :unproccessable_entity
+    end
   end
 
   def destory
