@@ -1,4 +1,12 @@
-<h1><%= @category.name %></h1>
+<% if @category.photo.attatched? %>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @category.photo.key, height: 300, crop: :fill %>')">
+<% else %>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+<% end %>
+  <div class="container">
+    <h1><%= @category.name %></h1>
+  </div>
+</div>
 
 <ul>
   <% @category.bookmarks.each do |bookmark| %>
@@ -15,6 +23,10 @@
   <%= link_to "back to all categories", categories_path %>
   <%= link_to "add a new recipe to your list", new_category_bookmark_path(@category) %>
 </ul>
+
+<% @category.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
 
 <%# back to the index page %>
 <%# link to add a new recipe (bookmark!) %>

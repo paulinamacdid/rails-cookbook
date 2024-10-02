@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to category_path(@category)
     else
-        render :new, status: :unproccessable_entity
+        render :new, status: :unproccessable_entry
     end
   end
 
@@ -27,10 +27,18 @@ class CategoriesController < ApplicationController
     redirect_to category_path, status: :see_other
   end
 
+  def article_params
+    params.require(:article).permit(:title, :body, photos: [])
+  end
+
   private
 
   def category_params
     params.require(:category).permit(:name)
   end
 
+  def article_params
+    params.require(:article).permit(:title, :body, :photo)
+  end
+  
 end
